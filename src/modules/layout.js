@@ -70,7 +70,7 @@ export default class Layout extends Component{
 					<TabItem
 						icon={<div style={{
 							width: '0.44rem',
-							height: '0.44em',
+							height: '0.44rem',
 							background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center / 0.42rem 0.42rem no-repeat'
 						}} />}
 						selectedIcon={<div style={{
