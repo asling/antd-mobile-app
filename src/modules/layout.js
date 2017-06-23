@@ -1,11 +1,10 @@
 import {TabBar, Icon } from 'antd-mobile';
 import React,{ Component } from 'react';
 
-import Live from './live';
+import Home from './home';
 import Koubei from './koubei';
 import Friend from './friend';
 import My from './my';
-
 const TabItem = TabBar.Item;
 
 export default class Layout extends Component{
@@ -26,20 +25,11 @@ export default class Layout extends Component{
 				hidden={this.state.hidden}
 			>
 				<TabItem 
-					title="live"
-					key="live"
-					icon={<div style={{
-						width: '0.44rem',
-						height: '0.44rem',
-						background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  0.42rem 0.42rem no-repeat'
-					}}></div>}
-					selectedIcon={<div style={{
-						width: '0.44rem',
-						height: '0.44rem',
-						background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center / 0.42rem 0.42rem no-repeat'
-					}}></div>}
+					title="首页"
+					key="首页"
+					icon={<Icon type={require('!svg-sprite-loader!../icons/tab-bar/money.svg')} size="md" />}
+					selectedIcon={<Icon type={require('!svg-sprite-loader!../icons/tab-bar/money-o.svg')} size="md" />}
 					selected={this.state.selectedTab === 'blueTab'}
-					badge={1}
 					onPress={()=>{
 						this.setState({
 							selectedTab : 'blueTab'
@@ -47,7 +37,7 @@ export default class Layout extends Component{
 					}}
 					data-seed="logId"
 					>
-						<Live />
+						<Home />
 					</TabItem>
 
 					<TabItem
