@@ -1,5 +1,6 @@
 import {TabBar, Icon } from 'antd-mobile';
 import React,{ Component } from 'react';
+import history from '../history';
 
 import Home from './home';
 import Koubei from './koubei';
@@ -11,9 +12,15 @@ export default class Layout extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			selected: 'redTab',
+			selectedTab: 'blueTab',
 			hidden: false,
-		}
+		};
+		console.log(1111);
+		console.log(history);
+	}
+
+	componentDidMount(){
+		history.push('/home');
 	}
 
 	render(){
@@ -31,13 +38,13 @@ export default class Layout extends Component{
 					selectedIcon={<Icon type={require('!svg-sprite-loader!../icons/tab-bar/money-o.svg')} size="md" />}
 					selected={this.state.selectedTab === 'blueTab'}
 					onPress={()=>{
+						history.push('/home');
 						this.setState({
-							selectedTab : 'blueTab'
-						})
+								selectedTab: 'blueTab'
+						});
 					}}
 					data-seed="logId"
 					>
-						<Home />
 					</TabItem>
 
 					<TabItem
@@ -46,6 +53,7 @@ export default class Layout extends Component{
 						badge={'new'}
 						selected={this.state.selectedTab === 'redTab'}
 						onPress={()=>{
+							history.push('/koubei');
 							this.setState({
 								selectedTab: 'redTab'
 							});
@@ -55,7 +63,6 @@ export default class Layout extends Component{
 						data-seed="logId1"
 
 					>
-						<Koubei />
 					</TabItem>
 					<TabItem
 						icon={<div style={{
@@ -73,12 +80,12 @@ export default class Layout extends Component{
 						dot
 						selected={this.state.selectedTab === 'greenTab'}
 						onPress={()=>{
+							history.push('/friend');
 							this.setState({
 								selectedTab: 'greenTab',
 							});
 						}}
 					>
-						<Friend />
 					</TabItem>
 					<TabItem
 						icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
@@ -87,12 +94,12 @@ export default class Layout extends Component{
 						key='我的'
 						selected={this.state.selectedTab === 'yellowTab'}
 						onPress={()=>{
+							history.push('/my');
 							this.setState({
 								selectedTab : 'yellowTab'
 							});
 						}}
 					>
-						<My />
 					</TabItem>
 				</TabBar>
 

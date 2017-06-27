@@ -11,11 +11,12 @@ module.exports = {
 	output:{
 		filename: '[name].[chunkhash].bundle.js',
 		path: path.resolve(__dirname,'dist'),
+		// publicPath: '/dist/',
 	},
 	devtool:'source-map',
 	resolve: {
 	    modules: ['node_modules', path.join(__dirname, '../node_modules')],
-	    extensions: ['.web.js', '.jsx', '.js', '.json'],
+	    extensions: ['.web.js', '.jsx', '.js', '.json','scss'],
 	},
 	module:{
 		loaders:[
@@ -31,10 +32,7 @@ module.exports = {
 				    presets: ['es2015', 'stage-3', 'react']
 				}
 			},
-			{ 
-				test: /\.(jpg|png)$/, 
-				loader: "url?limit=8192" 
-			},
+			
 			{ 
 				test: /\.(svg)$/i, 
 				loader: 'svg-sprite-loader', 
@@ -50,17 +48,31 @@ module.exports = {
 		 			use: ['postcss-loader','less-loader']
 		 		}) 
 		 	},
+		 	{
+		 		test: /\.scss$/,
+		 		loader: ExtractTextPlugin.extract({
+		 			use: ['css-loader','postcss-loader','sass-loader']
+		 		}) 
+		 	},
 		 	{ 
 		 		test: /\.css$/i, 
 		 		loader: ExtractTextPlugin.extract({
-		 			fallback: 'css-loader',
-		 			use: 'postcss-loader'
+		 			// fallback: 'css-loader',
+		 			use: ['css-loader','postcss-loader']
 		 		}) 
-		 	}
+		 	},
+		 	{ 
+				test: /\.(jpg|png)$/, 
+				loader: "url-loader?limit=8192&name=images/[name].[hash].[ext]" 
+			},
 		]
 	},
 	plugins:[
 		new WebpackChunkHash(),
+		new CopyWebpackPlugin([{
+			from: path.resolve(__dirname,"src/images"),
+			to: path.resolve(__dirname,"dist/images"),
+		}]),
 		new CopyWebpackPlugin([{
 			from: path.resolve(__dirname,"src/index.html"),
 		}]),
